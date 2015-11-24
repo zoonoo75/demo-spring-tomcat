@@ -8,7 +8,7 @@ ENV VOL_DIR ${BASE_DIR}/data
 # run with /bin/sh
  
 RUN apt-get update
-RUN	apt-get install -y \
+RUN apt-get install -y \
 		default-jre \
 		default-jdk \
 		tomcat7 \
@@ -20,19 +20,18 @@ RUN mkdir -p ${BASE_DIR}
 RUN mkdir -p ${VOL_DIR}
 
 WORKDIR ${BASE_DIR}
+VOLUME ${VOL_DIR}
 
 ADD target/${PKG_NAME} .
 
 RUN echo "#!/bin/bash" >> run.sh
-RUN echo "export JAVA_HOME=${JAVA_HOME}" >> run.sh
-RUN echo "echo using JAVA_HOME = \$JAVA_HOME" >> run.sh
-RUN echo "echo create log file > ${VOL_DIR}/data.log" >> run.sh
+#RUN echo "export JAVA_HOME=${JAVA_HOME}" >> run.sh
+RUN echo "echo starting daemon using JAVA_HOME: \$JAVA_HOME" >> run.sh
+RUN echo "echo hello world > ${VOL_DIR}/data.log" >> run.sh
+RUN echo "echo created log file: ${VOL_DIR}/data.log" >> run.sh
 RUN echo "java -jar ${PKG_NAME}">> run.sh
 RUN chmod 755 run.sh
 
-
-
-VOLUME ${VOL_DIR}
 EXPOSE 8080
 
 #CMD java -jar ${PKG_NAME}
