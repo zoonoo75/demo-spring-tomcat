@@ -1,9 +1,17 @@
 # demo-spring-tomcat
 
-compile 
+build package
 
 	mvn clean package
 	
-build
+build image
 
-	docker build -t zoonoo/demo-spring-tomcat:latest .
+	docker build -t <repo>/demo-spring-tomcat:latest .
+	
+run image (forground)
+
+	docker --rm -it -p 8080:8080 -v $HOME/tmp:/home/spring/data <image>
+	
+run image (background)
+
+	docker --rm -d -p ...

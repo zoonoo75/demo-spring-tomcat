@@ -9,11 +9,11 @@ ENV VOL_DIR ${BASE_DIR}/data
  
 RUN apt-get update
 RUN apt-get install -y \
-		default-jre \
-		default-jdk \
-		tomcat7 \
-		curl \
-		apt-file
+	default-jre \
+	default-jdk \
+	tomcat7 \
+	curl \
+	apt-file
 RUN apt-get clean
 
 RUN mkdir -p ${BASE_DIR}
